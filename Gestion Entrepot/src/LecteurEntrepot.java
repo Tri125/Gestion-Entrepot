@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -113,7 +114,44 @@ public class LecteurEntrepot
 				else
 					if ( ligne.get(0).equals(objetSupporte.get(3) ) && ligne.size() == 5)
 					{
-						//commandes.add(new Commande(ligne.get(0), ligne.get(1), ligne.get(2), ligne.get(3)));
+						Client clientTmp = null;
+						Produit produitTmp = null;
+						
+						for (Client c: clients)
+						{
+							if (ligne.get(3).equals(c.getNom()))
+							{
+								clientTmp = c;
+								break;
+							}
+						}
+						
+						for (Produit p : produits)
+						{
+							if (ligne.get(2).equals(p.getCode()))
+							{
+								produitTmp = p;
+								break;
+							}
+						}
+						
+						if (clientTmp == null)
+							System.out.println("LecteurEntrepot::Instantiation : Client de la commande introuvable");	
+						if (produitTmp == null)
+							System.out.println("LecteurEntrepot::Instantiation : Produit de la commande introuvable");
+						
+						try 
+						{
+							commandes.add(new Commande(ligne.get(1), produitTmp, clientTmp, ligne.get(4)));
+						} 
+						catch (NumberFormatException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} 
+						catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 					else
 					{
