@@ -38,6 +38,6 @@ public class Ordinateur extends Produit
 	
 	@Override
 	public String toString() {
-		return (super.toString() + ";" + marque);
+		return (super.toString() + ";" + marque + ";" + capaciteStockage);
 	}
 }
