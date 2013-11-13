@@ -3,10 +3,16 @@ public class Ordinateur extends Produit
 {
 	
 	private String marque;
+	private int capaciteStockage;
 	
 	public String getMarque()
 	{
 		return marque;
+	}
+	
+	public int getCapaciteStockage()
+	{
+		return capaciteStockage;
 	}
 	
 	
@@ -18,13 +24,14 @@ public class Ordinateur extends Produit
 	 * @param prix  prix unitaire (<code>double</code>)
 	 * @param marque marque de l'ordinateur (<code>String</code>)
 	 */
-	public Ordinateur(String code, int quantite, double prix, String marque) {
+	public Ordinateur(String code, int quantite, double prix, String marque, int capacite) {
 		super(code, quantite, prix);
 		this.marque = marque;
+		this.capaciteStockage = capacite;
 	}
 	
-	public Ordinateur(String codeS,String quantiteS, String prixS, String marqueS) throws NumberFormatException {
-		this(codeS,Integer.parseInt(quantiteS),Double.parseDouble(prixS), marqueS);
+	public Ordinateur(String codeS,String quantiteS, String prixS, String marqueS, String capaciteS) throws NumberFormatException {
+		this(codeS,Integer.parseInt(quantiteS),Double.parseDouble(prixS), marqueS, Integer.parseInt(capaciteS));
 	}
 	
 	
