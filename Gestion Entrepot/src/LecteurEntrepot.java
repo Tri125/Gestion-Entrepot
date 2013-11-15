@@ -9,6 +9,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 
 public class LecteurEntrepot 
@@ -21,8 +23,7 @@ public class LecteurEntrepot
 	private final List<String> objetSupporte;
 	
 	
-	private Map<String, List<Commande> > commandes2;
-	private Map<String, Produit> produits2;
+	private SortedMap<String, Produit> produits2;
 	
 	private List<Commande> commandes;
 	private Set<Client> clients;
@@ -30,8 +31,7 @@ public class LecteurEntrepot
 	
 	public LecteurEntrepot()
 	{
-		produits2 = new HashMap<String, Produit>(5);
-		commandes2 = new HashMap<String, List<Commande> >(4);
+		produits2 = new TreeMap<String, Produit>();
 		
 		commandes = new ArrayList<Commande>();
 		clients   = new HashSet<Client>();
@@ -67,11 +67,13 @@ public class LecteurEntrepot
 				
 			}
 			in.close();
+			isInitialized = true;
 		}
 		
 		catch (IOException e)
 		{
 			e.printStackTrace();
+			isInitialized = false;
 			//sup = null;
 		}
 		
