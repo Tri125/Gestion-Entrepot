@@ -33,6 +33,16 @@ public class LecteurEntrepot
 		return produits2;
 	}
 	
+	public List<Commande> getCommandes()
+	{
+		return commandes;
+	}
+	
+	public Set<Client> getClients()
+	{
+		return clients;
+	}
+	
 	
 
 	
