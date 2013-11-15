@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -27,7 +25,17 @@ public class LecteurEntrepot
 	
 	private List<Commande> commandes;
 	private Set<Client> clients;
-	private Set<Produit> produits;
+	
+	
+	
+	public SortedMap<String, Produit> getProduits()
+	{
+		return produits2;
+	}
+	
+	
+
+	
 	
 	public LecteurEntrepot()
 	{
@@ -35,7 +43,6 @@ public class LecteurEntrepot
 		
 		commandes = new ArrayList<Commande>();
 		clients   = new HashSet<Client>();
-		produits  = new HashSet<Produit>();
 		
 		objetSupporte = new ArrayList<String>(4);
 		objetSupporte.add("Livre");
@@ -109,7 +116,6 @@ public class LecteurEntrepot
 		
 		if ( ligne.get(0).equals(objetSupporte.get(0))  && ligne.size() == 6)
 		{
-			produits.add(new Livre(ligne.get(1), ligne.get(2), ligne.get(3), ligne.get(4), ligne.get(5)));
 			if (produits2.containsKey(ligne.get(1)))
 			{
 				System.out.print("LecteurEntrepot::Instantiation : Duplication du code produit." + ligne.get(1));
@@ -120,7 +126,6 @@ public class LecteurEntrepot
 		else
 			if ( ligne.get(0).equals(objetSupporte.get(1)) && ligne.size() == 6)
 			{
-				produits.add(new Ordinateur(ligne.get(1), ligne.get(2), ligne.get(3), ligne.get(4), ligne.get(5)));
 				if (produits2.containsKey(ligne.get(1)))
 				{
 					System.out.print("LecteurEntrepot::Instantiation : Duplication du code produit" + ligne.get(1));
@@ -148,13 +153,9 @@ public class LecteurEntrepot
 							}
 						}
 						
-						for (Produit p : produits)
+						if (produits2.containsKey(ligne.get(2)))
 						{
-							if (ligne.get(2).equals(p.getCode()))
-							{
-								produitTmp = p;
-								break;
-							}
+							produitTmp = produits2.get(ligne.get(2));
 						}
 						
 						if (clientTmp == null)
