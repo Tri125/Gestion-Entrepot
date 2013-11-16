@@ -24,9 +24,13 @@ public class LecteurEntrepot
 	private SortedMap<String, Produit> produits2;
 	
 	private List<Commande> commandes;
-	private Set<Client> clients;
+	private SortedMap<String, Client> clients;
 	
 	
+	public boolean getisInitialized()
+	{
+		return isInitialized;
+	}
 	
 	public SortedMap<String, Produit> getProduits()
 	{
@@ -38,7 +42,7 @@ public class LecteurEntrepot
 		return commandes;
 	}
 	
-	public Set<Client> getClients()
+	public SortedMap<String, Client> getClients()
 	{
 		return clients;
 	}
@@ -52,13 +56,31 @@ public class LecteurEntrepot
 		produits2 = new TreeMap<String, Produit>();
 		
 		commandes = new ArrayList<Commande>();
-		clients   = new HashSet<Client>();
+		clients   = new TreeMap<String, Client>();
 		
 		objetSupporte = new ArrayList<String>(4);
 		objetSupporte.add("Livre");
 		objetSupporte.add("Ordinateur");
 		objetSupporte.add("Client");
 		objetSupporte.add("Commande");
+	}
+	
+	
+	
+	public LecteurEntrepot(String fichier)
+	{
+		produits2 = new TreeMap<String, Produit>();
+		
+		commandes = new ArrayList<Commande>();
+		clients   = new TreeMap<String, Client>();
+		
+		objetSupporte = new ArrayList<String>(4);
+		objetSupporte.add("Livre");
+		objetSupporte.add("Ordinateur");
+		objetSupporte.add("Client");
+		objetSupporte.add("Commande");
+		
+		LectureFichier(fichier);
 	}
 	
 	
@@ -120,6 +142,16 @@ public class LecteurEntrepot
 		return ligneTraite;
 		
 	}
+	
+//	private boolean TypeSupporter(String type)
+//	{
+//		for (String tmp : objetSupporte)
+//		{
+//			if (tmp.equals(type))
+//				return true;
+//		}
+//		return false;
+//	}
 
 	private void Instantiation(List<String> ligne)
 	{
@@ -146,7 +178,7 @@ public class LecteurEntrepot
 			else
 				if ( ligne.get(0).equals(objetSupporte.get(2)) && ligne.size() == 3)
 				{
-					clients.add(new Client(ligne.get(1), ligne.get(2)));
+					clients.put(ligne.get(1), new Client(ligne.get(1), ligne.get(2)));
 				}
 				else
 					if ( ligne.get(0).equals(objetSupporte.get(3) ) && ligne.size() == 5)
@@ -154,14 +186,11 @@ public class LecteurEntrepot
 						Client clientTmp = null;
 						Produit produitTmp = null;
 						
-						for (Client c: clients)
+						if (clients.containsKey(ligne.get(3)))
 						{
-							if (ligne.get(3).equals(c.getNom()))
-							{
-								clientTmp = c;
-								break;
-							}
+							clientTmp = clients.get(ligne.get(3));
 						}
+						
 						
 						if (produits2.containsKey(ligne.get(2)))
 						{
