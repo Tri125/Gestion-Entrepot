@@ -31,11 +31,19 @@ public class EntrepotGUI extends JFrame
 		JRadioButton commander = new JRadioButton("Commander");
 		JButton ok = new JButton("OK");
 		JButton lister = new JButton("Lister");
-		JTextField code = new JTextField(1);
-		JTextField nom = new JTextField(1);
-		JTextField adresse = new JTextField(1);
-		JTextField quantite = new JTextField(1);
-		code.add(new JLabel("Code"));
+		
+		JLabel lbCode = new JLabel("Code");
+		JTextField txtCode = new JTextField(5);
+		
+		JLabel lbNom = new JLabel("Nom");
+		JTextField txtNom = new JTextField(10);
+		
+		JLabel lbAdresse = new JLabel("Adresse");
+		JTextField txtAdresse = new JTextField(20);
+		
+		JLabel lbQuantite = new JLabel("Quantité");
+		JTextField txtQuantite = new JTextField(3);
+		
 
 		JComboBox selectionProduit = new JComboBox(produits);
 		
@@ -52,10 +60,17 @@ public class EntrepotGUI extends JFrame
 		panel.add(ok);
 		panel.add(lister);
 		
-		//panel.add(code);
-		//panel.add(nom);
-		//panel.add(adresse);
-		//panel.add(quantite);
+		panel.add(lbCode);
+		panel.add(txtCode);
+		
+		panel.add(lbNom);
+		panel.add(txtNom);
+		
+		panel.add(lbAdresse);
+		panel.add(txtAdresse);
+		
+		panel.add(lbQuantite);
+		panel.add(txtQuantite);
 		
 	}
 
