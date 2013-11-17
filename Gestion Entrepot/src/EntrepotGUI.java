@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 
@@ -44,7 +45,11 @@ public class EntrepotGUI extends JFrame
 		JLabel lbQuantite = new JLabel("Quantité");
 		JTextField txtQuantite = new JTextField(3);
 		
-
+		JTextArea txtOutput = new JTextArea("teste");
+		//txtOutput.setEditable(false);
+		txtOutput.setLineWrap( true );
+		txtOutput.setWrapStyleWord( true );
+		
 		JComboBox<String> selectionProduit = new JComboBox<String>(produits);
 		
 		ButtonGroup group = new ButtonGroup();
@@ -72,6 +77,7 @@ public class EntrepotGUI extends JFrame
 		panel.add(lbQuantite);
 		panel.add(txtQuantite);
 		
+		panel.add(txtOutput);
 	}
 
 }
