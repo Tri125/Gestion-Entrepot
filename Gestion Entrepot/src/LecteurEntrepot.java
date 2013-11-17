@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -17,7 +15,7 @@ public class LecteurEntrepot
 	
 	private boolean isInitialized = false;
 	private BufferedReader in = null;
-	private String dernierFichierLut;
+	private String dernierFichierLut = null;
 	private final List<String> objetSupporte;
 	
 	
@@ -140,6 +138,12 @@ public class LecteurEntrepot
 		ligneTraite.add(subLigne);
 		
 		return ligneTraite;
+		
+	}
+	
+	
+	public void Sauvegarde(String chemin)
+	{
 		
 	}
 	
