@@ -45,7 +45,7 @@ public class EntrepotGUI extends JFrame
 		JTextField txtQuantite = new JTextField(3);
 		
 
-		JComboBox selectionProduit = new JComboBox(produits);
+		JComboBox<String> selectionProduit = new JComboBox<String>(produits);
 		
 		ButtonGroup group = new ButtonGroup();
 		group.add(ajouter);
