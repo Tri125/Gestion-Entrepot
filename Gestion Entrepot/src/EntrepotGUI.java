@@ -32,15 +32,14 @@ public class EntrepotGUI extends JFrame
 	private void Initialisation()
 	{
 		panel.add(new Options());
-		JTextArea txtOutput = new JTextArea("teste");
+		JTextArea txtOutput = new JTextArea();
 		txtOutput.setSize(this.getWidth(), this.getHeight()/2);
-		//txtOutput.setEditable(false);
+		txtOutput.setEditable(false);
 		txtOutput.setLineWrap( true );
 		txtOutput.setWrapStyleWord( true );
 		JScrollPane scroll = new JScrollPane (txtOutput, 
-				   JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		
-		panel.add(scroll, BorderLayout.CENTER);
+				   JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		panel.add(scroll);
 	}
 	
 	
