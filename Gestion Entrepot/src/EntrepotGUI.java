@@ -52,6 +52,7 @@ public class EntrepotGUI extends JFrame
 			String[] produits = { "Livre", "Ordinateur" };
 			JRadioButton ajouter = new JRadioButton("Ajouter");
 			JRadioButton enlever = new JRadioButton("Enlever");
+			JRadioButton rajoutUnite = new JRadioButton("Rajouter Unite");
 			JRadioButton commander = new JRadioButton("Commander");
 			JButton ok = new JButton("OK");
 			JButton lister = new JButton("Lister");
@@ -65,20 +66,22 @@ public class EntrepotGUI extends JFrame
 			JLabel lbAdresse = new JLabel("Adresse");
 			JTextField txtAdresse = new JTextField(20);
 			
-			JLabel lbQuantite = new JLabel("Quantité");
+			JLabel lbQuantite = new JLabel("Quantitï¿½");
 			JTextField txtQuantite = new JTextField(3);
 			
-			JComboBox<String> selectionProduit = new JComboBox<String>(produits);
+			JComboBox selectionProduit = new JComboBox(produits);
 			
 			ButtonGroup group = new ButtonGroup();
 			group.add(ajouter);
 			group.add(enlever);
+			group.add(rajoutUnite);
 			group.add(commander);
 			
 			
 			this.add(selectionProduit);
 			this.add(ajouter);
 			this.add(enlever);
+			this.add(rajoutUnite);
 			this.add(commander);
 			this.add(ok);
 			this.add(lister);
