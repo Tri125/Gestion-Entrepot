@@ -38,13 +38,13 @@ public class Entrepot
 			}
 			else
 			{
-				System.out.println("Entrepot::ChargementDonne : Erreur initialisation, aucune donnée chargé.");
+				System.out.println("Entrepot::ChargementDonne : Erreur initialisation, aucune donnï¿½e chargï¿½.");
 			}
 		}
 	}
 	
 	
-	public void RajoutInventaire(String code, int quantite)
+	public void RajoutUnite(String code, int quantite)
 	{
 		if (quantite <= 0)
 		{
@@ -63,7 +63,7 @@ public class Entrepot
 	
 	
 	
-	public void EnleverQuantite(String code, int quantite)
+	public void EnleverUnite(String code, int quantite)
 	{
 		if (quantite >= 0)
 		{
@@ -92,7 +92,7 @@ public class Entrepot
 		Produit produitTmp;
 		Commande cmdTmp;
 		
-		//Vérifie si le produit existe à partir du code
+		//Vï¿½rifie si le produit existe ï¿½ partir du code
 		if (produits.containsKey(codeProduit))
 		{
 			produitTmp = produits.get(codeProduit);
@@ -108,7 +108,7 @@ public class Entrepot
 			return;
 		}
 		
-		//Vérifie si le client existe déjà dans nos données
+		//Vï¿½rifie si le client existe dï¿½jï¿½ dans nos donnï¿½es
 		if (clients.containsKey(nomClient) )
 		{
 			clientTmp = clients.get(nomClient);
@@ -120,10 +120,10 @@ public class Entrepot
 			clients.put(nomClient, clientTmp);
 		}
 		
-		//Si nous pouvons commander la quantite demandé, nous procédons à la commande
+		//Si nous pouvons commander la quantite demandï¿½, nous procï¿½dons ï¿½ la commande
 		if (produits.get(codeProduit).enlever(quantite))
 		{
-			//Création d'une nouvelle commande
+			//Crï¿½ation d'une nouvelle commande
 			cmdTmp = new Commande (new Date(), produitTmp, clientTmp, quantite);
 			clientTmp.getCommandes().add(cmdTmp);
 			commandes.add(cmdTmp);
@@ -157,23 +157,38 @@ public class Entrepot
 	}
 	
 	
-//	public void RetirerProduit(String code)
-//	{
-//		if (produits.containsKey(code))
-//		{
-//			produits.remove(code);
-//		}
-//		else
-//		{
-//			System.out.println("Aucun produit correspond au code.");
-//		}
-//	}
+	public void RetirerProduit(String code)
+	{
+		if (produits.containsKey(code))
+		{
+			produits.remove(code);
+		}
+		else
+		{
+			System.out.println("Aucun produit correspond au code.");
+		}
+	}
 	
 	
+	//VERIFIER QUE LE CODE NEST DEJA PAS LA SINON SA OVERRIDE LA MAP FUCK FUCK!!!
 //	public void NouveauLivre(String codeS,String quantiteS, String prixS, String auteurS, String titreS)
 //	{
 //		Produit tmp = new Livre (codeS,quantiteS, prixS, auteurS, titreS);
+//		produits.put(tmp.getCode(), tmp);
 //	}
+	
+	
+//	public void NouveauOrdi(String codeS,String quantiteS, String prixS, String marqueS, String capaciteS)
+//	{
+//		Produit tmp = new Ordinateur (codeS,quantiteS, prixS, marqueS, capaciteS);
+//		produits.put(tmp.getCode(), tmp);
+//	}
+	
+	
+	public void Enregistrer()
+	{
+		lecteurDonne.Sauvegarde("pd.txt", produits, clients, commandes);
+	}
 	
 	
 	

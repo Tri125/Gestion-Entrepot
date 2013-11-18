@@ -13,6 +13,7 @@ public class Main {
 		gui.setVisible(true);
 		gui.setSize(800, 600);
 		gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//entrepot.Enregistrer();
 	}
 
 }

@@ -1,10 +1,15 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -24,6 +29,11 @@ public class LecteurEntrepot
 	private List<Commande> commandes;
 	private SortedMap<String, Client> clients;
 	
+	
+	public String getDernierFichierLut()
+	{
+		return dernierFichierLut;
+	}
 	
 	public boolean getisInitialized()
 	{
@@ -142,9 +152,68 @@ public class LecteurEntrepot
 	}
 	
 	
-	public void Sauvegarde(String chemin)
+	public void Sauvegarde(String chemin, SortedMap<String, Produit> produits, SortedMap<String, Client> clients, List<Commande> commandes)
 	{
+		BufferedWriter writer = null;
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		
+		try
+		{
+			 writer = new BufferedWriter(new FileWriter(chemin));
+			 Collection<Produit> colProduit = produits.values();
+			 for (Produit p : colProduit)
+			 {
+				 if (p instanceof Livre)
+				 {
+					 Livre tmp = (Livre)p;
+					 writer.write("Livre;" + tmp.getCode() + ";" + tmp.getQuantite() + ";" + tmp.getPrix() + ";" + tmp.getAuteur() + ";" + tmp.getTitre());
+					 writer.write("\n");
+				 }
+				 else
+					 if (p instanceof Ordinateur)
+					 {
+						 Ordinateur tmp = (Ordinateur)p;
+						 writer.write("Ordinateur;" + tmp.getCode() + ";" + tmp.getQuantite() + ";" + tmp.getPrix() + ";" + tmp.getMarque() + ";" + tmp.getCapaciteStockage());
+						 writer.write("\n");
+					 }
+					 else
+					 {
+						 System.out.println("Erreur: Type produit inconnue");
+						 writer.close();
+						 return;
+					 }
+			 }
+			 
+			 Collection<Client> colClient = clients.values();
+			 for (Client c : colClient)
+			 {
+				 writer.write("Client;" + c.getNom() + ";" + c.getAdresse());
+				 writer.write("\n");
+			 }
+			 
+			 for (Commande com : commandes)
+			 {
+				 writer.write("Commande;" + fmt.format(com.getDate()) + ";" + com.getProduit().getCode() + ";" + com.getClient().getNom() + ";" + com.getQuantite());
+				 writer.write("\n");
+			 }
+			 
+			 
+		}
+		catch (Exception e) 
+		{
+            e.printStackTrace();
+		}
+		finally 
+		{
+            try 
+            {
+                writer.close();
+            } 
+            catch (Exception e) 
+            {
+            	e.printStackTrace();
+            }
+        }
 	}
 	
 //	private boolean TypeSupporter(String type)
