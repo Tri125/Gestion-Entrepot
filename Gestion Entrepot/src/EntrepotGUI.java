@@ -316,10 +316,10 @@ public class EntrepotGUI extends JFrame
 	        		else{
 	        			if(ItemSelect == COMMANDER)
 	        				if(!NullEntrees(entreesCommande))
-	        					entrepot.Commander(entreesCommande.get("CodeCommande").getText(),
-	        									Integer.parseInt( entreesCommande.get("QuantiteCommande").getText() ),
-	        									entreesCommande.get("NomCommande").getText(),
-	        									entreesCommande.get("AdresseCommande").getText());
+	        					entrepot.Commander(entreesCommande.get("Code").getText(),
+	        									Integer.parseInt( entreesCommande.get("Quantite").getText() ),
+	        									entreesCommande.get("Nom").getText(),
+	        									entreesCommande.get("Adresse").getText());
 	        			for(JTextField tf: entreesAjoutOrdi.values()){
 	        				tf.setText(null);
 	        			}

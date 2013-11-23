@@ -118,6 +118,7 @@ public class Entrepot
 			//Sinon on rajoute un nouveau client dans la map
 			clientTmp = new Client (nomClient, adresse);
 			clients.put(nomClient, clientTmp);
+			System.out.println(clients.get(nomClient).toString());
 		}
 		
 		//Si nous pouvons commander la quantite demand�, nous proc�dons � la commande
@@ -125,10 +126,11 @@ public class Entrepot
 		{
 			//Cr�ation d'une nouvelle commande
 			cmdTmp = new Commande (new Date(), produitTmp, clientTmp, quantite);
-			clientTmp.getCommandes().add(cmdTmp);
 			commandes.add(cmdTmp);
+			System.out.println(commandes.toString());
 		}
-		
+		System.out.println(clients.get(nomClient).toString());
+		System.out.println(clients.get(nomClient).getCommandes().toString());
 	}
 	
 	
