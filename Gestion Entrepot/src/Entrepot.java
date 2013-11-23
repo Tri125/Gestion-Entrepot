@@ -171,18 +171,22 @@ public class Entrepot
 	
 	
 	//VERIFIER QUE LE CODE NEST DEJA PAS LA SINON SA OVERRIDE LA MAP FUCK FUCK!!!
-//	public void NouveauLivre(String codeS,String quantiteS, String prixS, String auteurS, String titreS)
-//	{
-//		Produit tmp = new Livre (codeS,quantiteS, prixS, auteurS, titreS);
-//		produits.put(tmp.getCode(), tmp);
-//	}
+	public void NouveauLivre(String codeS,String quantiteS, String prixS, String auteurS, String titreS)
+	{
+		Produit tmp = new Livre (codeS,quantiteS, prixS, auteurS, titreS);
+		produits.put(tmp.getCode(), tmp);
+		System.out.println("alla");
+		System.out.println(produits.get(codeS).toString());
+	}
 	
-	
-//	public void NouveauOrdi(String codeS,String quantiteS, String prixS, String marqueS, String capaciteS)
-//	{
-//		Produit tmp = new Ordinateur (codeS,quantiteS, prixS, marqueS, capaciteS);
-//		produits.put(tmp.getCode(), tmp);
-//	}
+	//VERIFIER QUE LE CODE NEST DEJA PAS LA SINON SA OVERRIDE LA MAP FUCK FUCK!!!
+	public void NouveauOrdi(String codeS,String quantiteS, String prixS, String marqueS, String capaciteS)
+	{
+		Produit tmp = new Ordinateur (codeS,quantiteS, prixS, marqueS, capaciteS);
+		produits.put(tmp.getCode(), tmp);
+		System.out.println("alla");
+		System.out.println(produits.get(codeS).toString());
+	}
 	
 	
 	public void Enregistrer()
