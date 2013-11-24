@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.PrintStream;
 import java.util.HashMap;
 
 import javax.swing.BoxLayout;
@@ -48,6 +49,10 @@ public class EntrepotGUI extends JFrame
 		JScrollPane scroll = new JScrollPane (txtOutput, 
 				   JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panel.add(scroll);
+		
+		
+		JTextAreaOutputStream out = new JTextAreaOutputStream (txtOutput);
+		System.setOut (new PrintStream (out));
 	}
 	
 	
@@ -89,6 +94,13 @@ public class EntrepotGUI extends JFrame
 			this.add(cb);
 			this.add(ok);
 			this.add(lister);
+			
+			lister.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					selectionProduit.getSelectedItem();	//Donne le produit sélectionné entre Livre et Ordinateur		
+				}
+			});
+			
 			
 			cards.add(CardAjouterLivre(),"AJOUTERLIVRE");
 			cards.add(CardAjouterOrdi(),"AJOUTERORDI");
