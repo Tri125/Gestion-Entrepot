@@ -41,8 +41,7 @@ public class EntrepotGUI extends JFrame
 	private void Initialisation()
 	{
 		panel.add(new Options());
-		txtOutput = new JTextArea();
-		//txtOutput.setSize(this.getWidth(), this.getHeight()/2);
+		txtOutput = new JTextArea(25,10);
 		txtOutput.setEditable(false);
 		txtOutput.setLineWrap( true );
 		txtOutput.setWrapStyleWord( true );
