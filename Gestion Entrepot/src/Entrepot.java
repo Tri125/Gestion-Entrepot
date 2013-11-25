@@ -92,7 +92,7 @@ public class Entrepot
 		Produit produitTmp;
 		Commande cmdTmp;
 		
-		//Vï¿½rifie si le produit existe ï¿½ partir du code
+		//Verifie si le produit existe a partir du code
 		if (produits.containsKey(codeProduit))
 		{
 			produitTmp = produits.get(codeProduit);
@@ -108,7 +108,7 @@ public class Entrepot
 			return;
 		}
 		
-		//Vï¿½rifie si le client existe dï¿½jï¿½ dans nos donnï¿½es
+		//Verifie si le client existe deja dans nos donnees
 		if (clients.containsKey(nomClient) )
 		{
 			clientTmp = clients.get(nomClient);
@@ -118,17 +118,17 @@ public class Entrepot
 			//Sinon on rajoute un nouveau client dans la map
 			clientTmp = new Client (nomClient, adresse);
 			clients.put(nomClient, clientTmp);
-			System.out.println(clients.get(nomClient).toString());
+			System.out.println("Nouveau Client : " + clients.get(nomClient).toString());
 		}
 		
-		//Si nous pouvons commander la quantite demandï¿½, nous procï¿½dons ï¿½ la commande
+		//Si nous pouvons commander la quantite demande, nous procedons a la commande
 		if (produits.get(codeProduit).enlever(quantite))
 		{
-			//Crï¿½ation d'une nouvelle commande
+			//Creation d'une nouvelle commande
 			cmdTmp = new Commande (new Date(), produitTmp, clientTmp, quantite);
 			commandes.add(cmdTmp);
-			System.out.println(commandes.toString());
 		}
+		System.out.println("Compte-Rendue de la commande : ");
 		System.out.println(clients.get(nomClient).toString());
 		System.out.println(clients.get(nomClient).getCommandes().toString());
 	}
@@ -136,6 +136,7 @@ public class Entrepot
 	
 	public void ListerProduits()
 	{
+		System.out.println("Produits\n");
 		for (Produit p : produits.values())
 		{
 			System.out.println(p.toString());
@@ -152,9 +153,20 @@ public class Entrepot
 	
 	public void ListerClients()
 	{
+		System.out.println("Clients\n");
 		for (Client c : clients.values())
 		{
-			System.out.println(c.toString());
+			Double total = 0.00;
+			int quantite = 0;
+			System.out.println(c.getNom() + "\t" + c.getAdresse());
+			for (Commande com : c.getCommandes())
+			{
+				quantite += com.getQuantite();
+				total += (com.getProduit().getPrix() * com.getQuantite());
+				System.out.println(com.getDate() + "\t | " + "\t" + com.getProduit().getCode() + "\t | \t" + com.getQuantite() + "\t | " + "\t" + com.getProduit().getPrix() + "$");
+			}
+			System.out.println("Total pour " + c.getNom() + "\t\t\t\t" + " |\t" + quantite + "\t" + " |" + "\t" + total + "$");
+			System.out.println("\n\n");
 		}
 	}
 	
@@ -164,6 +176,7 @@ public class Entrepot
 		if (produits.containsKey(code))
 		{
 			produits.remove(code);
+			System.out.println("Retirer: Produit " + code + " retirée du système");
 		}
 		else
 		{
@@ -177,8 +190,7 @@ public class Entrepot
 	{
 		Produit tmp = new Livre (codeS,quantiteS, prixS, auteurS, titreS);
 		produits.put(tmp.getCode(), tmp);
-		System.out.println("alla");
-		System.out.println(produits.get(codeS).toString());
+		System.out.println("Ajouter: " + produits.get(codeS).toString());
 	}
 	
 	//VERIFIER QUE LE CODE NEST DEJA PAS LA SINON SA OVERRIDE LA MAP FUCK FUCK!!!
@@ -186,14 +198,14 @@ public class Entrepot
 	{
 		Produit tmp = new Ordinateur (codeS,quantiteS, prixS, marqueS, capaciteS);
 		produits.put(tmp.getCode(), tmp);
-		System.out.println("alla");
-		System.out.println(produits.get(codeS).toString());
+		System.out.println("Ajouter: " + produits.get(codeS).toString());
 	}
 	
 	
 	public void Enregistrer()
 	{
 		lecteurDonne.Sauvegarde("pd.txt", produits, clients, commandes);
+		System.out.println("Enregistrer : " + lecteurDonne.getDernierFichierLut());
 	}
 	
 	

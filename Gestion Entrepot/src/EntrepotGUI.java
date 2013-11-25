@@ -25,7 +25,7 @@ public class EntrepotGUI extends JFrame
 {
 	private Entrepot entrepot;
 	private JPanel panel;
-	
+	private JTextArea txtOutput;
 	public EntrepotGUI(Entrepot e)
 	{
 		super();
@@ -41,7 +41,7 @@ public class EntrepotGUI extends JFrame
 	private void Initialisation()
 	{
 		panel.add(new Options());
-		JTextArea txtOutput = new JTextArea();
+		txtOutput = new JTextArea();
 		txtOutput.setSize(this.getWidth(), this.getHeight()/2);
 		txtOutput.setEditable(false);
 		txtOutput.setLineWrap( true );
@@ -97,7 +97,9 @@ public class EntrepotGUI extends JFrame
 			
 			lister.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
-					selectionProduit.getSelectedItem();	//Donne le produit sélectionné entre Livre et Ordinateur		
+					selectionProduit.getSelectedItem();	//Donne le produit sélectionné entre Livre et Ordinateur	
+					txtOutput.setText(null);
+					entrepot.ListerProduits();
 				}
 			});
 			
@@ -311,7 +313,7 @@ public class EntrepotGUI extends JFrame
 	        }else{
 	        	if(ItemSelect == ENLEVER){
 	        		if(!NullEntrees(entreesEnlever))
-	        			entrepot.RetirerProduit(entreesEnlever.get("CodeEnlever").getText());
+	        			entrepot.RetirerProduit(entreesEnlever.get("Code").getText());
 	        		for(JTextField tf: entreesAjoutOrdi.values()){
 	        			tf.setText(null);
 	        		}
