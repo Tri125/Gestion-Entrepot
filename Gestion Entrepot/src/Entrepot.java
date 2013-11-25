@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.SortedMap;
@@ -38,7 +39,7 @@ public class Entrepot
 			}
 			else
 			{
-				System.out.println("Entrepot::ChargementDonne : Erreur initialisation, aucune donn�e charg�.");
+				System.out.println("Entrepot::ChargementDonne : Erreur initialisation, aucune donnee charge.");
 			}
 		}
 	}
@@ -174,6 +175,7 @@ public class Entrepot
 		for (Client c : clients.values())
 		{
 			Double total = 0.00;
+			DecimalFormat f = new DecimalFormat("##.00");
 			int quantite = 0;
 			System.out.println(c.getNom() + "\t" + c.getAdresse());
 			for (Commande com : c.getCommandes())
@@ -182,7 +184,7 @@ public class Entrepot
 				total += (com.getProduit().getPrix() * com.getQuantite());
 				System.out.println(com.getDate() + "\t | " + "\t" + com.getProduit().getCode() + "\t | \t" + com.getQuantite() + "\t | " + "\t" + com.getProduit().getPrix() + "$");
 			}
-			System.out.println("Total pour " + c.getNom() + "\t\t\t\t" + " |\t" + quantite + "\t" + " |" + "\t" + total + "$");
+			System.out.println("Total pour " + c.getNom() + "\t\t\t\t" + " |\t" + quantite + "\t" + " |" + "\t" + f.format(total) + "$");
 			System.out.println("\n\n");
 		}
 		System.out.println("\n");
