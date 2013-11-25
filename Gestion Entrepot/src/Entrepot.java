@@ -137,18 +137,35 @@ public class Entrepot
 	public void ListerProduits()
 	{
 		System.out.println("Produits\n");
+		System.out.println("Code\t | Type \t | \t Qte | \t Prix  |");
+		System.out.println("-------------------------------------------------------------------------------------------------------------------");
 		for (Produit p : produits.values())
 		{
-			System.out.println(p.toString());
+			if (p instanceof Livre)
+			{
+				Livre tmp = (Livre)p;
+				System.out.println(p.getCode() + "\t | " + "Livre" + " \t | \t " + p.getQuantite() + " | \t " + p.getPrix() + "$" + "  |" + "\t" + tmp.getAuteur() + "\t|" + "\t" + tmp.getTitre());
+			}
+			else
+			{
+				if (p instanceof Ordinateur)
+				{
+					Ordinateur tmp = (Ordinateur)p;
+					System.out.println(p.getCode() + "\t | " + "Ordinateur" + " \t | \t " + p.getQuantite() + " | \t " + p.getPrix() + "$" + "  |" + "\t" + tmp.getMarque() + "\t|" + "\t" + tmp.getCapaciteStockage());
+				}
+			}
 		}
+		System.out.println("\n");
 	}
 	
 	public void ListerCommandes()
 	{
+		System.out.println("Commandes\n");
 		for (Commande c : commandes)
 		{
 			System.out.println(c.toString());
 		}
+		System.out.println("\n");
 	}
 	
 	public void ListerClients()
@@ -168,6 +185,7 @@ public class Entrepot
 			System.out.println("Total pour " + c.getNom() + "\t\t\t\t" + " |\t" + quantite + "\t" + " |" + "\t" + total + "$");
 			System.out.println("\n\n");
 		}
+		System.out.println("\n");
 	}
 	
 	

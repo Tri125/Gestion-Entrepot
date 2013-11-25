@@ -100,6 +100,8 @@ public class EntrepotGUI extends JFrame
 					selectionProduit.getSelectedItem();	//Donne le produit sélectionné entre Livre et Ordinateur	
 					txtOutput.setText(null);
 					entrepot.ListerProduits();
+					entrepot.ListerCommandes();
+					entrepot.ListerClients();
 				}
 			});
 			
