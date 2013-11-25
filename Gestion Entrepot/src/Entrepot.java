@@ -224,7 +224,7 @@ public class Entrepot
 	
 	public void Enregistrer()
 	{
-		lecteurDonne.Sauvegarde("pd.txt", produits, clients, commandes);
+		lecteurDonne.Sauvegarde(lecteurDonne.getDernierFichierLut(), produits, clients, commandes);
 		System.out.println("Enregistrer : " + lecteurDonne.getDernierFichierLut());
 	}
 	

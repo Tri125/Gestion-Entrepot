@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.WindowEvent;
 import java.io.PrintStream;
 import java.util.HashMap;
 
@@ -33,6 +34,17 @@ public class EntrepotGUI extends JFrame
 		entrepot = e;
 		Initialisation();
 	}
+	
+	
+	protected void processWindowEvent(WindowEvent e) {
+	    if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+	      System.out.println(WindowEvent.WINDOW_CLOSING);
+	      entrepot.Enregistrer();
+	      dispose(); 
+	      System.exit(0);
+	    }
+	    super.processWindowEvent(e); // Pass on the event
+	  }
 	
 	private void Initialisation()
 	{
