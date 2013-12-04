@@ -1,0 +1,111 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt, french]{article} % use larger type; default would be 10pt
+\usepackage[francais]{babel}
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+\usepackage[T1]{fontenc}
+\usepackage[squaren,Gray]{SIunits}
+\usepackage{amsmath}
+\usepackage{hyperref}
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+% \geometry{margin=2in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+% These packages are all incorporated in the memoir class to one degree or another...
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+%%% END Article customizations
+
+%%% The "real" document content comes below...
+
+\title{Logiciel de Gestion d'Entrepot\\- Rapport -}
+\author{Tristan Savaria et Jonathan Forget}
+\date{9 décembre 2013} 
+
+\begin{document}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\section{Description et utilisation des fonctions}
+\paragraph{}
+
+\subsection{Utilisateur}
+
+Le programme est une réplique du jeu de table Titanic de la compagnie Smart Games. Le programme charge un fichier texte au lancement et génère une grille de jeu. Le programme est capable
+d'importer un fichier .txt de format UTF-8 contenant une grille de jeu de dimension 5 par 5. Une ligne vide ou une ligne commencant par \# est ignorée. Un tiret (-) représente une case vide, une lettre est un naufragé et un chiffre complété d'une flèche représente un bateau. Les flèches représentes la direction du bateau et les symboles possibles sont $\leftarrow$ $\rightarrow$ $\uparrow$ et $\downarrow$. Le joueur peut sélectionner un bateau avec un clique gauche de la sourit. Une fois sélectionné, les flèches du clavier peuvent être utilisés pour déplacer la bateau dans la même direction sous condition que la destination n'est pas bloqué ou hors grille. Lorsqu'un bateau ce déplace à côté d'un naufragé, le naufragé rentre dans le bateau et le navire est désormais impossible d'être déplacé. Le but du jeu consiste à sauver tout les naufragés.
+
+\subsection{Programmeur}
+La classe \textit{ImporteurGrille} prend un int qui deviendra une constante privé pour forcer la dimension de la grille lors de la création de l'objet. La méthode \textit{Chargement} prend un String représentant le chemin vers un fichier .txt. La méthode lis le flus dans le format UTF-8, ignore les lignes vides ou commencant par le symbole \# , rajoute chaque caractère lut dans un tableau de char de deux dimensions et retourne le tableau.
+\newline
+
+La classe \textit{EcranJeu} est un JFrame responsable de la fenêtre du programme, ainsi des menus disponibles au dessus de la fenêtre. EcranJeu instantie la classe Plateau, Plateau est une composante fille de EcranJeu. 
+\newline
+
+\textit{Plateau} est la grille de jeu de taille fixe. Plateau utilise un GridLayout et a des objets de type Case comme composantes filles. À partir d'un tableau de char de 2 dimensions, la méthode \textit{GenerateGrid} instantie les objets Cases, les positionnes dans un tableau de Case de deux dimensions et finalise par rajouter les Cases comme composante de Plateau. La méthode \textit{SetKeybind} lie un dictionnaire de touche d'entré du clavier à un dictionnaire d'Action, utilisé pour déplacé les bateaux selon les touches du clavier. Finalement, la classe vérifie si les mouvements des bateaux sont légaux.
+\newline
+
+Dans la classe \textit{Case}, classe fille de JPanel, plusieurs constructeur sont disponibles. Pour les case vide sur la grille, le constructeur prend comme paramètre une référence du plateau, la coordonnée x et la coordonnée y de l'emplacement de la case sur la grille. Une case avec un Flottant prend les mêmes paramètres en plus d'une référence sur un objet de type Flottant. Une Case avec un flottant a également un MouseListener qui sert à la sélection avec le clique gauche de la souris. La case teste le type de son attribut flot pour lancer l'appel d'affichage approprié selon si c'est un naufragé, un bateau ou une proue. La classe a un attribut de type Color qui est une couleur gris-argenté avec un alpha pour le carré de sélection.
+\newline
+
+La classe \textit{Bateau} a comme attribut une direction, un naufragé et une référence vers une case contenant sa proue. La classe instantie sa propre case et sa propre proue. \textit{Proue} n'est que la tête du bateau. Selon la direction son orientation change.
+\newline
+
+Le programme utilise un enum appelé \textit{Direction}. Direction est utilise à plusieurs endroit, comme la classe Bateau, Proue et pour envoyer une commande de direction. L'enum a comme champs: "Haut", "BAS", "GAUCHE" et "DROITE" et associe chacun à un char symbolisant une flèche de la même direction en UTF-8. L'enum permet de bien représenter une direction, d'où le nom choisis.
+
+\section{Structures de données employées et justification}
+\paragraph{}
+Aucune structure de données n'a été utilisé.
+
+
+\section{Discussion}
+\paragraph{}
+Le projet était simple à complété, nous avons structuré le programme en plusieurs classes  séparant la logique. Nous n'avons pas eu de problème avec la programmation orienté objet puisque nous avons tout les deux plus de 2 ans d'expérience en programmation orienté objet avec C\# et C++. Le projet nous as permis de comprendre le fonctionnement particulier des composantes de Java Swing et de comment les dessiner. Quelques problèmes ont été rencontré, tel qu'inversé les composantes d'accès des tableau de deux dimensions. Également, le fichier d'exemple d'une grille de jeu était illisible au début de notre travail, mais nous avons réalisé que le format était en UTF-8. Lors de la lecture du fichier, chaque ligne débutait avec un point d'interrogation. Une petite recherche a dévoilé que c'était un symbole de Byte Order rajouté par l'infâme éditeur de texte: notepad.
+
+
+
+\section{Améliorations possibles}
+\paragraph{}
+Il serait bien de pouvoir charger plusieurs fichiers de grille de jeu à partir d'un menu. Également, il serait d'une nette amélioration de pouvoir chargé plusieurs grilles avec un seul fichier. Aucune vérification est fait sur les dimensions de la grille dans le fichier de grille, donc une erreur ce produit et le programme sera terminé. Plusieurs portions du code manipule des tableaus de deux dimensions et ce n'est pas tout à fait clair, nous pourrions passer davantage de temps pour améliorer la cohérence de la classe Plateau. Nous avons intégré des menus dans le jeu, mais ils ne sont pas encore fonctionnelles, une deuxième phase du projet implémenterait des menus fonctionnelles.
+
+
+
+\end{document}
