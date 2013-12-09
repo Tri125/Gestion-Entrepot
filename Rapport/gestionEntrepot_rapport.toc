@@ -7,5 +7,5 @@
 \contentsline {paragraph}{}{5}{section*.3}
 \contentsline {section}{\numberline {3}Discussion}{5}{section.3}
 \contentsline {paragraph}{}{5}{section*.4}
-\contentsline {section}{\numberline {4}Am\IeC {\'e}liorations possibles}{5}{section.4}
-\contentsline {paragraph}{}{5}{section*.5}
+\contentsline {section}{\numberline {4}Am\IeC {\'e}liorations possibles}{6}{section.4}
+\contentsline {paragraph}{}{6}{section*.5}
