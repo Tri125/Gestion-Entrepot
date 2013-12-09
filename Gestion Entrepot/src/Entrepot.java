@@ -20,7 +20,7 @@ public class Entrepot
 	
 	public Entrepot(String fichier)
 	{
-		lecteurDonne = new LecteurEntrepot();
+		this();
 		ChargementDonne(fichier);
 	}
 	
@@ -205,17 +205,25 @@ public class Entrepot
 	}
 	
 	
-	//VERIFIER QUE LE CODE NEST DEJA PAS LA SINON SA OVERRIDE LA MAP FUCK FUCK!!!
 	public void NouveauLivre(String codeS,String quantiteS, String prixS, String auteurS, String titreS)
 	{
+		if (produits.containsKey(codeS))
+		{
+			System.out.println("Produit deja existant");
+			return;
+		}
 		Produit tmp = new Livre (codeS,quantiteS, prixS, auteurS, titreS);
 		produits.put(tmp.getCode(), tmp);
 		System.out.println("Ajouter: " + produits.get(codeS).toString());
 	}
 	
-	//VERIFIER QUE LE CODE NEST DEJA PAS LA SINON SA OVERRIDE LA MAP FUCK FUCK!!!
 	public void NouveauOrdi(String codeS,String quantiteS, String prixS, String marqueS, String capaciteS)
 	{
+		if (produits.containsKey(codeS))
+		{
+			System.out.println("Produit deja existant");
+			return;
+		}
 		Produit tmp = new Ordinateur (codeS,quantiteS, prixS, marqueS, capaciteS);
 		produits.put(tmp.getCode(), tmp);
 		System.out.println("Ajouter: " + produits.get(codeS).toString());

@@ -35,7 +35,7 @@ public class EntrepotGUI extends JFrame
 		Initialisation();
 	}
 	
-	
+	// Source: http://stackoverflow.com/questions/15499211/calling-function-on-windows-close
 	protected void processWindowEvent(WindowEvent e) {
 	    if (e.getID() == WindowEvent.WINDOW_CLOSING) {
 	      System.out.println(WindowEvent.WINDOW_CLOSING);

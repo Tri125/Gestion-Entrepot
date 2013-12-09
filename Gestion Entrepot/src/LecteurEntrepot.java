@@ -23,7 +23,7 @@ public class LecteurEntrepot
 	private final List<String> objetSupporte;
 	
 	
-	private SortedMap<String, Produit> produits2;
+	private SortedMap<String, Produit> produits;
 	
 	private List<Commande> commandes;
 	private SortedMap<String, Client> clients;
@@ -41,7 +41,7 @@ public class LecteurEntrepot
 	
 	public SortedMap<String, Produit> getProduits()
 	{
-		return produits2;
+		return produits;
 	}
 	
 	public List<Commande> getCommandes()
@@ -60,7 +60,7 @@ public class LecteurEntrepot
 	
 	public LecteurEntrepot()
 	{
-		produits2 = new TreeMap<String, Produit>();
+		produits = new TreeMap<String, Produit>();
 		
 		commandes = new ArrayList<Commande>();
 		clients   = new TreeMap<String, Client>();
@@ -76,17 +76,7 @@ public class LecteurEntrepot
 	
 	public LecteurEntrepot(String fichier)
 	{
-		produits2 = new TreeMap<String, Produit>();
-		
-		commandes = new ArrayList<Commande>();
-		clients   = new TreeMap<String, Client>();
-		
-		objetSupporte = new ArrayList<String>(4);
-		objetSupporte.add("Livre");
-		objetSupporte.add("Ordinateur");
-		objetSupporte.add("Client");
-		objetSupporte.add("Commande");
-		
+		this();	
 		LectureFichier(fichier);
 	}
 	
@@ -230,22 +220,22 @@ public class LecteurEntrepot
 		
 		if ( ligne.get(0).equals(objetSupporte.get(0))  && ligne.size() == 6)
 		{
-			if (produits2.containsKey(ligne.get(1)))
+			if (produits.containsKey(ligne.get(1)))
 			{
 				System.out.print("LecteurEntrepot::Instantiation : Duplication du code produit." + ligne.get(1));
 				return;
 			}
-			produits2.put(ligne.get(1), new Livre(ligne.get(1), ligne.get(2), ligne.get(3), ligne.get(4), ligne.get(5)));
+			produits.put(ligne.get(1), new Livre(ligne.get(1), ligne.get(2), ligne.get(3), ligne.get(4), ligne.get(5)));
 		}
 		else
 			if ( ligne.get(0).equals(objetSupporte.get(1)) && ligne.size() == 6)
 			{
-				if (produits2.containsKey(ligne.get(1)))
+				if (produits.containsKey(ligne.get(1)))
 				{
 					System.out.print("LecteurEntrepot::Instantiation : Duplication du code produit" + ligne.get(1));
 					return;
 				}
-				produits2.put(ligne.get(1), new Ordinateur(ligne.get(1), ligne.get(2), ligne.get(3), ligne.get(4), ligne.get(5)));
+				produits.put(ligne.get(1), new Ordinateur(ligne.get(1), ligne.get(2), ligne.get(3), ligne.get(4), ligne.get(5)));
 			}
 			else
 				if ( ligne.get(0).equals(objetSupporte.get(2)) && ligne.size() == 3)
@@ -264,9 +254,9 @@ public class LecteurEntrepot
 						}
 						
 						
-						if (produits2.containsKey(ligne.get(2)))
+						if (produits.containsKey(ligne.get(2)))
 						{
-							produitTmp = produits2.get(ligne.get(2));
+							produitTmp = produits.get(ligne.get(2));
 						}
 						
 						if (clientTmp == null)
