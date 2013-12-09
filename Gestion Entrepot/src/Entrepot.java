@@ -128,10 +128,16 @@ public class Entrepot
 			//Creation d'une nouvelle commande
 			cmdTmp = new Commande (new Date(), produitTmp, clientTmp, quantite);
 			commandes.add(cmdTmp);
+			
+			System.out.println("Compte-Rendue de la commande : ");
+			System.out.println(clients.get(nomClient).toString());
+			System.out.println(clients.get(nomClient).getCommandes().toString());
 		}
-		System.out.println("Compte-Rendue de la commande : ");
-		System.out.println(clients.get(nomClient).toString());
-		System.out.println(clients.get(nomClient).getCommandes().toString());
+		else
+		{
+			System.out.println();
+			System.out.println("Quantite en entrepot insufisante");
+		}
 	}
 	
 	
@@ -196,7 +202,7 @@ public class Entrepot
 		if (produits.containsKey(code))
 		{
 			produits.remove(code);
-			System.out.println("Retirer: Produit " + code + " retirée du système");
+			System.out.println("Retirer: Produit " + code + " retirï¿½e du systï¿½me");
 		}
 		else
 		{
